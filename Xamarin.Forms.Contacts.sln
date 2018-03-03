@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugin", "Plugin", "{2CB4010C-8053-4948-8D11-E1AEFBBCD2AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{FA6DC839-C434-41D4-995B-DC9367E51765}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DependencyService", "DependencyService", "{C6563FCC-C2A2-47B3-9F23-F00F99401F3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{34A1B0B6-77FF-4FE2-86B5-BC860584D07A}"
+	ProjectSection(SolutionItems) = preProject
+		XamarinFromsContacs.nuspec = XamarinFromsContacs.nuspec
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactService", "Plugin\ContactService\ContactService.csproj", "{DB5AB1D1-4F03-408C-BEC6-A64D3677F7BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB5AB1D1-4F03-408C-BEC6-A64D3677F7BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB5AB1D1-4F03-408C-BEC6-A64D3677F7BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB5AB1D1-4F03-408C-BEC6-A64D3677F7BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB5AB1D1-4F03-408C-BEC6-A64D3677F7BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DB5AB1D1-4F03-408C-BEC6-A64D3677F7BB} = {2CB4010C-8053-4948-8D11-E1AEFBBCD2AB}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7CA44725-2DFF-4BA4-AC13-A4A1702E3D2C}
+	EndGlobalSection
+EndGlobal
