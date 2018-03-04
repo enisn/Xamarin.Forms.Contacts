@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DependencyService", "Depend
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{34A1B0B6-77FF-4FE2-86B5-BC860584D07A}"
 	ProjectSection(SolutionItems) = preProject
-		XamarinFromsContacs.nuspec = XamarinFromsContacs.nuspec
+		XamarinFormsContacts.nuspec = XamarinFormsContacts.nuspec
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactService", "Plugin\ContactService\ContactService.csproj", "{DB5AB1D1-4F03-408C-BEC6-A64D3677F7BB}"
