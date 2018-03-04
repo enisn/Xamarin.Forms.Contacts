@@ -1,36 +1,34 @@
-﻿using Contacts;
-using Foundation;
-using Plugin.ContactService.Shared;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Contacts;
+using DependencyService.ContactService.Helpers;
+using DependencyService.ContactService.iOS.Helpers;
+using Foundation;
+using Xamarin.Forms;
+using UIKit;
 
-namespace Plugin.ContactService
+
+[assembly: Dependency(typeof(ContactService))]
+namespace DependencyService.ContactService.iOS.Helpers
 {
-    /// <summary>
-    /// Interface for $safeprojectgroupname$
-    /// </summary>
-    public class ContactServiceImplementation : IContactService
+    
+    public class ContactService : IContactService
     {
-        /// <summary>
-        /// Gets contact in a background task
-        /// </summary>
-        /// <returns></returns>
+
         public Task<IList<Contact>> GetContactListAsync()
         {
             return Task.Run<IList<Contact>>(() =>
             {
                 return GetContactList();
+
             });
 
         }
 
-        /// <summary>
-        /// Gets contact in main thread
-        /// !!!Not Recommended
-        /// </summary>
         public IList<Contact> GetContactList()
         {
             try

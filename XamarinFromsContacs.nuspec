@@ -19,7 +19,7 @@
     <projectUrl>http://github.com/contoso/UsefulStuff</projectUrl>
 
     <!-- The icon is used in Visual Studio's package manager UI -->
-    <iconUrl>http://github.com/contoso/UsefulStuff/nuget_icon.png</iconUrl>
+    <iconUrl>http://enisnecipoglu.com/Plugins/ic_account_box_black.png</iconUrl>
 
     <!-- If true, this value prompts the user to accept the license when
             installing the package. -->
@@ -33,19 +33,34 @@
     <description>Core utility functions for web applications</description>
 
     <!-- Copyright information -->
-    <copyright>Copyright ©2016 Contoso Corporation</copyright>
+    <copyright>Copyright ©2018 Contoso Corporation</copyright>
 
     <!-- Tags appear in the gallery and can be used for tag searches -->
     <tags>web utility http json url parsing</tags>
 
     <!-- Dependencies are automatically installed when the package is installed -->
     <dependencies>
-        <dependency id="Newtonsoft.Json" version="9.0" />
+        
     </dependencies>
     </metadata>
 
     <!-- A readme.txt to display when the package is installed -->
     <files>
-        <file src="readme.txt" target="" />
+   
+         <!-- Cross-platform reference assemblies -->
+    <file src="Plugin\ContactService\bin\Release\netstandard2.0\Plugin.ContactService.dll" target="lib\netstandard2.0\Plugin.ContactService.dll" />
+    <file src="Plugin\ContactService\bin\Release\netstandard2.0\Plugin.ContactService.xml" target="lib\netstandard2.0\Plugin.ContactService.xml" />
+    <file src="Plugin\ContactService\bin\Release\netstandard1.0\Plugin.ContactService.dll" target="lib\netstandard1.0\Plugin.ContactService.dll" />
+    <file src="Plugin\ContactService\bin\Release\netstandard1.0\Plugin.ContactService.xml" target="lib\netstandard1.0\Plugin.ContactService.xml" />
+      
+      
+    <!-- iOS reference assemblies -->
+    <file src="Plugin\ContactService\bin\Release\xamarin.ios10\Plugin.ContactService.dll" target="lib\Xamarin.iOS10\Plugin.ContactService.dll" />
+    <file src="Plugin\ContactService\bin\Release\xamarin.ios10\Plugin.ContactService.xml" target="lib\Xamarin.iOS10\Plugin.ContactService.xml" />
+
+    <!-- Android reference assemblies -->
+    <file src="Plugin\ContactService\bin\Release\monoandroid80\Plugin.ContactService.dll" target="lib\MonoAndroid10\Plugin.ContactService.dll" />
+    <file src="Plugin\ContactService\bin\Release\monoandroid80\Plugin.ContactService.xml" target="lib\MonoAndroid10\Plugin.ContactService.xml" />
+
     </files>
 </package>
