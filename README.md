@@ -9,12 +9,12 @@ var contacts = await Plugin.ContactService.CrossContactService.Current.GetContac
 
 DO NOT FORGET ADD THIS PERMISSIONS:
 
-#ANDROID
+# ANDROID
 ```
 READ_CONTACTS
 ```
 
-#iOS
+# iOS
 If you don't have mac connection you should Right Click the **Info.plist** and Open With XML editor.
 Add this key into **<dict>**
 ```xml
