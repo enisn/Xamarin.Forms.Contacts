@@ -23,7 +23,7 @@ namespace DependencyService.ContactService.Droid.Helpers
         {
             var uri = ContactsContract.Contacts.ContentUri;
             //var ctx = Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity;
-            var ctx = Application.Context;
+            var ctx = Android.App.Application.Context;
             var cursor = ctx.ApplicationContext.ContentResolver.Query(uri, null, null, null, null);
 
             var contactList = new List<Contact>();
