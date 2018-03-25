@@ -5,7 +5,7 @@
     <id>Xamarin.Forms.Contacts</id>
 
     <!-- The package version number that is used when resolving dependencies -->
-    <version>1.0.1</version>
+    <version>1.0.3</version>
 
     <!-- Authors contain text that appears directly on the gallery -->
     <authors>Enis Necipoğlu, Sumeyya Arar</authors>
@@ -26,7 +26,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
 
     <!-- Any details about this particular release -->
-    <releaseNotes>Android Context bug Fixed</releaseNotes>
+    <releaseNotes>iOS CNContactKey Error solved</releaseNotes>
 
     <summary>
       Read contacts from iOS and Android Devices
@@ -51,7 +51,7 @@
     </description>
 
     <!-- Copyright information -->
-    <copyright>Copyright ©2018 Enis Necipoglu</copyright>
+    <copyright>OpenSource on Git | Copyright ©2018 Enis Necipoglu</copyright>
 
     <!-- Tags appear in the gallery and can be used for tag searches -->
     <tags>Contact,Xamarin,Xamarin Forms,Read Contact, NSContact,Contact List</tags>

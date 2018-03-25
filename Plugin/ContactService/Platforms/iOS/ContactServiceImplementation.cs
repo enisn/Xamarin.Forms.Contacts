@@ -35,7 +35,7 @@ namespace Plugin.ContactService
         {
             try
             {
-                var keysToFetch = new[] { CNContactKey.GivenName, CNContactKey.FamilyName, CNContactKey.EmailAddresses };
+                var keysToFetch = new[] { CNContactKey.Identifier, CNContactKey.GivenName, CNContactKey.FamilyName, CNContactKey.EmailAddresses, CNContactKey.PhoneNumbers, CNContactKey.ImageDataAvailable };
                 NSError error;
                 //var containerId = new CNContactStore().DefaultContainerIdentifier;
                 // using the container id of null to get all containers.
