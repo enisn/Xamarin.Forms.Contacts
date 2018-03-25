@@ -1,6 +1,9 @@
 # Xamarin.Forms.Contacts
 Read Contacts Data on iOS and Android
 
+NuGet Package is Available:
+<a href="https://www.nuget.org/packages/Xamarin.Forms.Contacts/">Xamarin.Forms.Contacts 1.0.1</a>
+
 Easy usage in Portable Project:
 
 ```csharp
