@@ -1,92 +1,105 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Android.App;
 using Android.Content;
-using Android.OS;
+using Android.Database;
 using Android.Provider;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Xamarin.Forms;
 using DependencyService.ContactService.Droid.Helpers;
 using DependencyService.ContactService.Helpers;
+using Xamarin.Forms;
+using Application = Android.App.Application;
 
 [assembly: Dependency(typeof(ContactService))]
 namespace DependencyService.ContactService.Droid.Helpers
 {
     public class ContactService : IContactService
     {
-        public IList<Contact> GetContactList()
+        public IList<Contact> GetContactList() { return GetContactListA().ToList(); }
+
+        private IEnumerable<Contact> GetContactListA()
         {
             var uri = ContactsContract.Contacts.ContentUri;
             //var ctx = Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity;
-            var ctx = Android.App.Application.Context;
+            var ctx = Application.Context;
             var cursor = ctx.ApplicationContext.ContentResolver.Query(uri, null, null, null, null);
-
-            var contactList = new List<Contact>();
-
-
-            if (cursor.MoveToFirst())
+            if (cursor.Count == 0)
             {
-                while (cursor.MoveToNext())
-                {
-                    if (cursor.GetString(cursor.GetColumnIndex(ContactsContract.Contacts.InterfaceConsts.DisplayName)) == null)
-                        continue;
-
-                    var _contact = new Contact();
-
-                    _contact.Name = cursor.GetString(cursor.GetColumnIndex(ContactsContract.Contacts.InterfaceConsts.DisplayName));
-                    _contact.PhotoUri = cursor.GetString(cursor.GetColumnIndex(ContactsContract.Contacts.InterfaceConsts.PhotoUri));
-                    _contact.PhotoUriThumbnail = cursor.GetString(cursor.GetColumnIndex(ContactsContract.Contacts.InterfaceConsts.PhotoThumbnailUri));
-
-                    String contact_id = cursor.GetString(cursor.GetColumnIndex(ContactsContract.Contacts.InterfaceConsts.Id));
-
-                    #region Email
-                    var emailCursor = ctx.ApplicationContext.ContentResolver.Query(
-                             ContactsContract.CommonDataKinds.Email.ContentUri, null,
-                             ContactsContract.CommonDataKinds.Email.InterfaceConsts.ContactId + " = ?",
-                             new String[] { contact_id }, null);
-
-                    while (emailCursor.MoveToNext())
-                    {
-                        _contact.Email = emailCursor.GetString(emailCursor.GetColumnIndex(ContactsContract.CommonDataKinds.Email.InterfaceConsts.Data));
-                        _contact.Emails.Add(_contact.Email);
-
-                    }
-                    emailCursor.Close();
-                    #endregion
-
-
-
-                    if (cursor.GetString(cursor.GetColumnIndex(ContactsContract.Contacts.InterfaceConsts.HasPhoneNumber)) == "1")
-                    {
-                        #region Phone
-                        var phoneCursor = ctx.ApplicationContext.ContentResolver.Query(
-                            ContactsContract.CommonDataKinds.Phone.ContentUri, null,
-                            ContactsContract.CommonDataKinds.Phone.InterfaceConsts.ContactId + " = ?",
-                            new string[] { contact_id }, null
-                            );
-                        while (phoneCursor.MoveToNext())
-                        {
-                            _contact.Number = phoneCursor.GetString(phoneCursor.GetColumnIndex(ContactsContract.CommonDataKinds.Phone.Number));
-                            _contact.Numbers.Add(_contact.Number);
-                        }
-                        phoneCursor.Close();
-                        #endregion
-                    }
-
-                    contactList.Add(_contact);
-                }
-            }
-            else
-            {
-                //ActivityCompat.RequestPermissions((Activity)Forms.Context, new string[] { permission }, 1);
+                yield break;
             }
 
-            return contactList;
+            while (cursor.MoveToNext())
+            {
+                var contact = CreateContact(cursor, ctx);
+
+                if (!string.IsNullOrWhiteSpace(contact.Name))
+                    yield return contact;
+            }
+        }
+
+        private static Contact CreateContact(ICursor cursor, Context ctx)
+        {
+            var contactId = GetString(cursor, ContactsContract.Contacts.InterfaceConsts.Id);
+//            var hasNumbers = GetString(cursor, ContactsContract.Contacts.InterfaceConsts.HasPhoneNumber) == "1";
+
+            var numbers = GetNumbers(ctx, contactId).ToList();
+            var emails = GetEmails(ctx, contactId).ToList();
+
+            var contact = new Contact
+            {
+                Name = GetString(cursor, ContactsContract.Contacts.InterfaceConsts.DisplayName),
+                PhotoUri = GetString(cursor, ContactsContract.Contacts.InterfaceConsts.PhotoUri),
+                PhotoUriThumbnail = GetString(cursor, ContactsContract.Contacts.InterfaceConsts.PhotoThumbnailUri),
+                Emails = emails,
+                Email = emails.LastOrDefault(),
+                Numbers = numbers,
+                Number = numbers.LastOrDefault()
+            };
+
+            return contact;
+        }
+
+        private static IEnumerable<string> GetNumbers(Context ctx, string contactId)
+        {
+            var key = ContactsContract.CommonDataKinds.Phone.Number;
+
+            var cursor = ctx.ApplicationContext.ContentResolver.Query(
+                ContactsContract.CommonDataKinds.Phone.ContentUri,
+                null,
+                ContactsContract.CommonDataKinds.Phone.InterfaceConsts.ContactId + " = ?",
+                new[] { contactId },
+                null
+            );
+
+            return ReadCursorItems(cursor, key);
+        }
+        private static IEnumerable<string> GetEmails(Context ctx, string contactId)
+        {
+            var key = ContactsContract.CommonDataKinds.Email.InterfaceConsts.Data;
+
+            var cursor = ctx.ApplicationContext.ContentResolver.Query(
+                ContactsContract.CommonDataKinds.Email.ContentUri,
+                null,
+                ContactsContract.CommonDataKinds.Email.InterfaceConsts.ContactId + " = ?",
+                new[] { contactId },
+                null);
+
+            return ReadCursorItems(cursor, key);
+        }
+
+        private static IEnumerable<string> ReadCursorItems(ICursor cursor, string key)
+        {
+            while (cursor.MoveToNext())
+            {
+                var value = GetString(cursor, key);
+                yield return value;
+            }
+            cursor.Close();
+        }
+
+        private static string GetString(ICursor cursor, string key)
+        {
+            return cursor.GetString(cursor.GetColumnIndex(key));
         }
 
         public Task<IList<Contact>> GetContactListAsync()
