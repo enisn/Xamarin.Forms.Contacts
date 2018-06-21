@@ -5,10 +5,10 @@
     <id>Xamarin.Forms.Contacts</id>
 
     <!-- The package version number that is used when resolving dependencies -->
-    <version>1.0.3</version>
+    <version>1.0.5</version>
 
     <!-- Authors contain text that appears directly on the gallery -->
-    <authors>Enis Necipoğlu, Sumeyya Arar</authors>
+    <authors>Enis Necipoğlu,sadgit ,Sumeyya Arar</authors>
 
     <!-- Owners are typically nuget.org identities that allow gallery
             users to easily find other packages by the same owners.  -->
@@ -26,7 +26,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
 
     <!-- Any details about this particular release -->
-    <releaseNotes>iOS CNContactKey Error solved</releaseNotes>
+    <releaseNotes>Optimization Improvements, Bugs fixed</releaseNotes>
 
     <summary>
       Read contacts from iOS and Android Devices
