@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DependencyService", "Depend
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{34A1B0B6-77FF-4FE2-86B5-BC860584D07A}"
 	ProjectSection(SolutionItems) = preProject
+		NugetPack.bat = NugetPack.bat
 		XamarinFormsContacts.nuspec = XamarinFormsContacts.nuspec
 	EndProjectSection
 EndProject
