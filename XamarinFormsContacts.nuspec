@@ -5,7 +5,7 @@
     <id>Xamarin.Forms.Contacts</id>
 
     <!-- The package version number that is used when resolving dependencies -->
-    <version>1.0.5</version>
+    <version>1.0.6</version>
 
     <!-- Authors contain text that appears directly on the gallery -->
     <authors>Enis Necipoğlu,sadgit ,Sumeyya Arar</authors>
@@ -26,7 +26,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
 
     <!-- Any details about this particular release -->
-    <releaseNotes>Optimization Improvements, Bugs fixed</releaseNotes>
+    <releaseNotes>Return types cahanged to IEnumerable and added Func to filter contacts. Performance optimized</releaseNotes>
 
     <summary>
       Read contacts from iOS and Android Devices

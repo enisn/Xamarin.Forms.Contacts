@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Plugin.ContactService.Shared
 {
@@ -24,27 +23,27 @@ namespace Plugin.ContactService.Shared
         /// <summary>
         /// Phone number of this contact
         /// </summary>
-        public string Number { get; set; }
+        public string Number { get => Numbers.LastOrDefault(); }
         /// <summary>
         /// Email address of this contact
         /// </summary>
-        public string Email { get; set; }
+        public string Email { get => Emails.LastOrDefault(); }
         /// <summary>
         /// If contact have multiple phone numbers 
         /// </summary>
-        public List<string> Numbers { get; set; }
+        public IEnumerable<string> Numbers { get; set; }
         /// <summary>
         /// IF contact have multiple email addresses
         /// </summary>
-        public List<string> Emails { get; set; }
+        public IEnumerable<string> Emails { get; set; }
 
         /// <summary>
         /// Default Constructor
         /// </summary>
         public Contact()
         {
-            Numbers = new List<string>();
-            Emails = new List<string>();
+            //Numbers = new List<string>();
+            //Emails = new List<string>();
         }
         /// <summary>
         /// Displays contact name

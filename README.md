@@ -2,7 +2,7 @@
 Read Contacts Data on iOS and Android
 
 <a href="https://www.nuget.org/packages/Xamarin.Forms.Contacts/">
-<img src="https://img.shields.io/badge/Nuget-1.0.5-blue.svg">
+<img src="https://img.shields.io/badge/Nuget-1.0.6-blue.svg">
 </a>
 
 Easy usage in Portable Project:
@@ -10,6 +10,26 @@ Easy usage in Portable Project:
 ```csharp
 var contacts = await Plugin.ContactService.CrossContactService.Current.GetContactListAsync();
 ```
+
+
+You can generate ObservableCollection like that:
+
+
+```csharp
+var contacts = await Plugin.ContactService.CrossContactService.Current.GetContactListAsync();
+
+ObservableCollection<Contact> = new ObservableCollection<Contact>(contacts);
+
+```
+
+
+You can use filter like that:
+
+
+```csharp
+var contacts = await Plugin.ContactService.CrossContactService.Current.GetContactListAsync(x=>x.Emails.Count > 0);
+```
+
 
 DO NOT FORGET ADD THIS PERMISSIONS:
 

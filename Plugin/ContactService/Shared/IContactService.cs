@@ -12,12 +12,12 @@ namespace Plugin.ContactService
         /// Gets contact in an awaitable background task
         /// </summary>
         /// <returns></returns>
-        Task<IList<Contact>> GetContactListAsync();
+        Task<IEnumerable<Contact>> GetContactListAsync(Func<Contact,bool> filter = null);
         /// <summary>
         /// Gets contacts in main thread
         /// !!!NOT RECOMMENDED
         /// </summary>
         /// <returns></returns>
-        IList<Contact> GetContactList();
+        IEnumerable<Contact> GetContactList(Func<Contact, bool> filter = null);
     }
 }

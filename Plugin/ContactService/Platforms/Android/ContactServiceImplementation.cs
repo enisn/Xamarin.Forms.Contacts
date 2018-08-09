@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Database;
 using Android.Provider;
 using Plugin.ContactService.Shared;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Plugin.ContactService
 {
@@ -14,16 +14,16 @@ namespace Plugin.ContactService
     /// </summary>
     public class ContactServiceImplementation : IContactService
     {
-        public IList<Contact> GetContactList()
+        public IEnumerable<Contact> GetContactList(Func<Contact, bool> filter = null)
         {
-            return GetContacts()
-                .ToList();
+            return GetContacts(filter);
+            //.ToList();
         }
 
 
-        public Task<IList<Contact>> GetContactListAsync() { return Task.Run(() => GetContactList()); }
+        public Task<IEnumerable<Contact>> GetContactListAsync(Func<Contact, bool> filter = null) => Task.Run(() => GetContactList(filter));
 
-        private IEnumerable<Contact> GetContacts()
+        private IEnumerable<Contact> GetContacts(Func<Contact, bool> filter = null)
         {
             var uri = ContactsContract.Contacts.ContentUri;
             //var ctx = Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity;
@@ -35,6 +35,9 @@ namespace Plugin.ContactService
             {
                 var contact = CreateContact(cursor, ctx);
 
+                if (filter != null && !filter(contact))
+                    continue;
+
                 if (!string.IsNullOrWhiteSpace(contact.Name))
                     yield return contact;
             }
@@ -45,10 +48,10 @@ namespace Plugin.ContactService
             var contactId = GetString(cursor, ContactsContract.Contacts.InterfaceConsts.Id);
             //            var hasNumbers = GetString(cursor, ContactsContract.Contacts.InterfaceConsts.HasPhoneNumber) == "1";
 
-            var numbers = GetNumbers(ctx, contactId)
-                .ToList();
-            var emails = GetEmails(ctx, contactId)
-                .ToList();
+            var numbers = GetNumbers(ctx, contactId);
+                //.ToList();
+            var emails = GetEmails(ctx, contactId);
+                //.ToList();
 
             var contact = new Contact
             {
@@ -56,9 +59,7 @@ namespace Plugin.ContactService
                 PhotoUri = GetString(cursor, ContactsContract.Contacts.InterfaceConsts.PhotoUri),
                 PhotoUriThumbnail = GetString(cursor, ContactsContract.Contacts.InterfaceConsts.PhotoThumbnailUri),
                 Emails = emails,
-                Email = emails.LastOrDefault(),
                 Numbers = numbers,
-                Number = numbers.LastOrDefault()
             };
 
             return contact;
@@ -72,7 +73,7 @@ namespace Plugin.ContactService
                 ContactsContract.CommonDataKinds.Phone.ContentUri,
                 null,
                 ContactsContract.CommonDataKinds.Phone.InterfaceConsts.ContactId + " = ?",
-                new[] {contactId},
+                new[] { contactId },
                 null
             );
 
@@ -87,7 +88,7 @@ namespace Plugin.ContactService
                 ContactsContract.CommonDataKinds.Email.ContentUri,
                 null,
                 ContactsContract.CommonDataKinds.Email.InterfaceConsts.ContactId + " = ?",
-                new[] {contactId},
+                new[] { contactId },
                 null);
 
             return ReadCursorItems(cursor, key);

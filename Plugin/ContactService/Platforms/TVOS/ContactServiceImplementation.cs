@@ -11,12 +11,12 @@ namespace Plugin.ContactService
     /// </summary>
     public class ContactServiceImplementation : IContactService
     {
-        public IList<Contact> GetContactList()
+        public IEnumerable<Contact> GetContactList(Func<Contact, bool> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IList<Contact>> GetContactListAsync()
+        public Task<IEnumerable<Contact>> GetContactListAsync(Func<Contact, bool> filter = null)
         {
             throw new NotImplementedException();
         }
