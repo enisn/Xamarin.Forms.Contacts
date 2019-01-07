@@ -89,7 +89,7 @@ namespace Plugin.ContactService
         {
             foreach (var number in contact.PhoneNumbers)
             {
-                yield return number?.Value?.ToString();
+                yield return number?.Value?.StringValue;
             }
         }
 
