@@ -1,3 +1,9 @@
+# Obsolete
+This library is obsolete and doesn't target newer versions of Android & iOS. 
+
+I strongly recommend to use [Xamarin.Essentials](https://github.com/xamarin/Essentials) to read contacts.
+
+---
 # Xamarin.Forms.Contacts
 Read Contacts Data on iOS and Android
 
